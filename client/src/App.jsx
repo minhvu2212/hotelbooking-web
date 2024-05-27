@@ -16,7 +16,8 @@ import AllPlaces from "./pages/AllPlaces";
 import FindPlacePage from "./pages/FindPlaces";
 import WishlistPage from "./pages/WishlistPage";
 import BookingManager from "./pages/BookingManager";
-axios.defaults.baseURL = "http://localhost:3001/";
+axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? 'https://hotelbooking-web-6b8s.onrender.com/' : 'http://localhost:3001/';
+
 axios.defaults.withCredentials = true;
 
 function App() {
