@@ -106,15 +106,28 @@ class PlaceController {
 
     //[GET] /places/find/:query
     async queryPlace(req, res) {
-        const { query } = req.params;
-        const places = await Place.find({
-            $or: [
-                { address: { $regex: query, $options: 'i' } },
-                { title: { $regex: query, $options: 'i' } },
-            ],
-        });
-        res.json(places);
+        try {
+            const { query } = req.params;
+            console.log('Received query:', query); // Logging nhận được query
+            if (!query) {
+                return res.status(400).json({ error: 'Query parameter is required' });
+            }
+    
+            const places = await Place.find({
+                $or: [
+                    { address: { $regex: query, $options: 'i' } },
+                    { title: { $regex: query, $options: 'i' } },
+                ],
+            });
+    
+            console.log('Found places:', places); // Logging kết quả tìm kiếm
+            res.json(places);
+        } catch (error) {
+            console.error('Error querying places:', error);
+            res.status(500).json({ error: 'An error occurred while querying places' });
+        }
     }
+    
 }
 
 module.exports = new PlaceController();

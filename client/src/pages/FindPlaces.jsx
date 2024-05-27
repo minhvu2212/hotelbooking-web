@@ -9,7 +9,7 @@ export default function FindPlacePage() {
     const [places, setPlaces] = useState([]);
     const [ready, setReady] = useState(false);
     useEffect(() => {
-        axios.get(`/places/find/${query}`).then((response) => {
+        axios.get(`http://localhost:3001/places/find/${query}`).then((response) => {
             setPlaces(response.data);
             setReady(true);
         });
