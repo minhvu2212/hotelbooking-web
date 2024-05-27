@@ -85,7 +85,8 @@ class SiteController {
                         if (err) {
                             throw err;
                         }
-                        res.cookie('token', token).json(userDoc);
+                        // Set cookie with SameSite=None and Secure attributes
+                        res.cookie('token', token, { sameSite: 'None', secure: true }).json(userDoc);
                     },
                 );
             } else {
@@ -95,7 +96,7 @@ class SiteController {
             res.status(422).json('Not found account');
         }
     }
-
+    
     //[GET] /profile
     profile(req, res) {
         const { token } = req.cookies;

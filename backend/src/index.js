@@ -16,12 +16,14 @@ db.connect();
 
 app.use(
     cors({
+        origin: ['http://localhost:5173', 'https://hotelbooking-web-1fh7.vercel.app'],
         credentials: true,
-        origin: 'http://localhost:5173',
-    }),
+    })
 );
 
+
 app.use(cookieParser());
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 
